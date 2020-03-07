@@ -1,0 +1,900 @@
+<!--
+	作者：Sariay
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+<!DOCTYPE html>
+<html class="html-loading">
+		
+
+<head><meta name="generator" content="Hexo 3.9.0">
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      OSPF的防环机制(转载) | 千秋雪博客
+    
+  </title>
+  <meta name="author" content="千秋雪">
+  <meta name="keywords" content="千秋雪博客">
+  <meta name="description" content="学无止境">
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/Annie.css">
+  
+  <!-- jquery -->
+	<script src="/js/jquery.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="spinner">
+					<div class="double-bounce1"></div>
+					<div class="double-bounce2"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="normal" data-normal-src="https://ae01.alicdn.com/kf/He930e138dfc14b7dbd45bc16dccb897cb.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
+	<div class="mask">
+		<!-- Logo and navigation -->
+		<div class="h-header">
+			<div id="logo">
+				<a href="/">
+						
+						<img src="/img/logo.png" alt="Logo">
+					
+				</a>
+			</div>
+			
+			<div id="navigation-show">
+				<ul>
+	
+		<li class="menu-首页">
+			<a href="/" class="menu-item-首页">首页</a>
+		</li>
+	
+		<li class="menu-归档">
+			<a href="/archives" class="menu-item-归档">归档</a>
+		</li>
+	
+		<li class="menu-相册">
+			<a href="/photo" class="menu-item-相册">相册</a>
+		</li>
+	
+		<li class="menu-图床">
+			<a href="/tuchuang" class="menu-item-图床">图床</a>
+		</li>
+	
+		<li class="menu-关于我">
+			<a href="/about" class="menu-item-关于我">关于我</a>
+		</li>
+	
+
+	
+		<li class="menu-search">
+			<a href="javascript:;" class="popup-trigger">搜索</a>
+		</li>
+	
+</ul>
+			</div>				
+		</div>
+
+		<!-- motto -->
+		<div class="h-body">	
+			
+				<p class="motto"></p>
+			
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down" aria-hidden="true"></i>
+			</a>
+
+			
+				<!-- 
+	This is only a demo, please go to "https://time.is" to set your city time! 
+-->
+<style type="text/css">
+	.header-date {
+		font-size: 1.6rem;
+		color: #fff;
+		position: absolute;
+		bottom: 5px;
+		right: 1rem;
+		writing-mode: tb-rl;
+	}	
+	
+	.header-date a {
+		border-bottom: none;
+	}
+
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			font-size: 1rem;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+			
+		</div>
+	</div>
+</header>
+
+<div id="navigation-hide">
+	<!-- Progress bar -->
+	<div id="progress-bar"></div>
+
+	<!-- Progress percent -->
+	<div id="progress-percentage"><h1>0.0%</h1></div>
+
+	<div class="toc-switch"><span class="switch-button">目录</span></div>
+
+	<!-- Page title -->
+	<p>
+		
+			当前文章&nbsp;:&nbsp;《OSPF的防环机制(转载)》
+		
+	</p>
+
+	<!-- Nav trigger for navigation-H-->
+	<a class="nav-trigger"><span></span></a>
+</div>
+
+<!-- Navigation in div(id="navigation-H") -->
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+	
+		<li class="menu-首页">
+			<a href="/" class="menu-item-首页">首页</a>
+		</li>
+	
+		<li class="menu-归档">
+			<a href="/archives" class="menu-item-归档">归档</a>
+		</li>
+	
+		<li class="menu-相册">
+			<a href="/photo" class="menu-item-相册">相册</a>
+		</li>
+	
+		<li class="menu-图床">
+			<a href="/tuchuang" class="menu-item-图床">图床</a>
+		</li>
+	
+		<li class="menu-关于我">
+			<a href="/about" class="menu-item-关于我">关于我</a>
+		</li>
+	
+
+	
+		<li class="menu-search">
+			<a href="javascript:;" class="popup-trigger">搜索</a>
+		</li>
+	
+</ul>
+	</div>
+	<div class="nav-footer">
+		<ul>
+	
+		<li>
+			<a href="https://github.com/X-2018" target="_blank">
+				<i class="fa fa-github"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="https://weibo.com/a370323" target="_blank">
+				<i class="fa fa-weibo"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://test407.lofter.com/" target="_blank">
+				<i class="fa fa-instagram"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="https://space.bilibili.com/39018066" target="_blank">
+				<i class="fa fa-twitter"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="/sitemap.html" target="_blank">
+				<i class="fa fa-rss"></i>
+			</a>
+		</li>
+			
+</ul>
+
+	</div>
+</nav>
+			
+		<!--main-->
+		<main>
+			<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+
+	
+		<div class="layout-toc">
+			<div id="layout-toc">
+				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
+			</div>
+		</div>
+
+		
+		<script src="/plugin/toc/katelog.min.js"></script>
+
+		
+	 
+
+<div class="layout-post">
+	<div id="layout-post">
+	<div class="article-title">
+		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+		
+	<a href="/2019/10/09/OSPF的防环机制-转载/" itemprop="url">
+		OSPF的防环机制(转载)
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			<i class="fa fa-calendar"></i>
+			
+
+
+	发布于
+
+	<a href="/2019/10/09/OSPF的防环机制-转载/" itemprop="url">
+		<time datetime="2019-10-09T10:09:04.000Z" itemprop="datePublished">
+	  		2019-10-09
+	  </time>
+	</a>
+	&nbsp;
+
+
+
+
+
+			
+
+
+
+
+	更新于
+
+	<a href="/2019/10/09/OSPF的防环机制-转载/" itemprop="url">
+		<time datetime="2019-10-09T10:09:04.000Z" itemprop="dateUpdated">
+	  		2019-10-09
+	  </time>
+	</a> 
+
+
+
+		</span>
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/网络技术/" class=" ">
+			网络技术
+		</a>
+	
+		
+		</span>
+		
+		
+
+
+
+	</div>
+
+	<div class="article-content" id="article-content">
+		<p>OSPF与距离矢量路由协议不同，运行OSPF的路由器之间交互并不是路由信息，而是LSA，而路由器的计算正是基于网络中所泛洪的各种LSA，所以实际上OSPF路由的环路规避机制还得依赖LSA在环路避免上的设计。</p>
+<h1 id="先来看看第一种：Type-1-LSA及Type-2-LSA的防环"><a href="#先来看看第一种：Type-1-LSA及Type-2-LSA的防环" class="headerlink" title="先来看看第一种：Type-1 LSA及Type-2 LSA的防环~~"></a>先来看看第一种：Type-1 LSA及Type-2 LSA的防环~~</h1><p>我们都知道，每台运行OSPF的路由器都会产生Type-1 LSA，Type-1 LSA用于描述路由器的直连接口状态（接口IP信息或所连接的邻居，另外还有接口的Cost值），而且只在接口所属的区域内泛洪。Type-1 LSA使用各种类型的Link来描述路由器直连接口。Type-2 LSA则只出现在MA网络，由DR产生，用于描述接入该MA网络的所有路由器（的Router-ID），以及该MA网络的掩码信息。<br>得益于区域内泛洪的Type-1 LSA及Type-2 LSA，OSPF路由器能够“在自己的脑海中”还原区域内的网络拓扑及网段信息。路由器为每个区域维护一个独立的LSDB，并且运行一套独立的SPF算法，同一个区域内的路由器，拥有针对该区域的相同LSDB，大家都基于这个LSDB计算出一颗以自己为根的、无环的最短路径树。之所以能做到无环，是因为路由器能够通过LSA描绘出区域的完整拓扑（包括所有接口的Cost）及网段信息。以下图所示的网络为例：</p>
+<p><img src="http://source.iqianyue.net/wp-content/uploads/2017/05/2017050413020124.png?imageView2/2/w/1200#" alt></p>
+<p>R1、R2、R3及R4的接口均在Area0中，四台路由器都会产生Type-1 LSA并且在Area内泛洪。另外以太网链路由于缺省是广播型多路访问网络，因此会进行DR/BDR的选举，DR会产生Type-2 LSA并在区域内泛洪。在LSDB同步完成之后，每台路由器都拥有了整个区域的拓扑及网段信息，这些都是通过网络中泛洪的Type-1 LSA及Type-2 LSA拼凑出来的，请看下图：</p>
+<p><img src="http://source.iqianyue.net/wp-content/uploads/2017/05/2017050413015680.jpg?imageView2/2/w/1200#" alt></p>
+<p>接下来，每台路由器都以自己为根，计算一颗无环的最短路径数，以R3为例，它的最短路径树可能像下面这个样子：</p>
+<p><img src="http://source.iqianyue.net/wp-content/uploads/2017/05/2017050413015784.png?imageView2/2/w/1200#" alt></p>
+<p>所以，依赖Type-1 LSA及Type-2 LSA，路由器能够描绘出区域内的拓扑及网段信息，从而运行SPF算法，计算出到达每个网段的最优路径，并将这些路径安装到路由表中，因此区域内的路由（Intra-AreaRoute）可以实现无环路。</p>
+<h1 id="Type-3-LSA及Type-4-LSA的防环"><a href="#Type-3-LSA及Type-4-LSA的防环" class="headerlink" title="Type-3 LSA及Type-4 LSA的防环~~"></a>Type-3 LSA及Type-4 LSA的防环~~</h1><p>OSPF要求所有的非0区域必须与骨干区域直接相连，区域间路由需经由骨干区域中转。<br>OSPF要求所有的非0区域必须与骨干区域直接相连，区域间（Inter-Area Route）路由需经由骨干区域中转。这个要求使得区域间的路由传递不能发生在两个非0的区域之间，这在很大程度上规避了区域间路由环路的发生，也使得OSPF的区域架构在逻辑上形成了一个类似星型的拓扑，如下图所示：</p>
+<p><img src="http://source.iqianyue.net/wp-content/uploads/2017/05/2017050413015861.png?imageView2/2/w/1200#" alt></p>
+<p>ABR只能够将其所连接的区域的区域内部路由注入到Area0，但是可以将区域内部路由及区域间的路由注入到非0常规区域。ABR从非骨干区域收到的Type-3 LSA不能用于区域间路由的计算。<br>OSPF对ABR有着严苛的要求，区域间的路由传递的关键点在于ABR对Summary LSA的处理。</p>
+<p><img src="http://source.iqianyue.net/wp-content/uploads/2017/05/2017050413015969.png?imageView2/2/w/1200#" alt></p>
+<p>在上图中，如果R3是一台普通的OSPF路由器（不是ABR），例如当它与R2没有OSPF邻居关系时，它会根据R4在Area2中泛洪的Type-3 LSA计算出1.1.1.0/24路由并将路由加载进路由表中。但是当R3与R2建立起OSPF邻接关系后，R3在Area0中就有了一个活跃的全毗邻连接，此时如果它把描述1.1.1.0/24路由的Type-3LSA再注入回Area0，那么就会带来潜在环路的风险，如下图所示：</p>
+<p><img src="http://source.iqianyue.net/wp-content/uploads/2017/05/2017050413020078.png?imageView2/2/w/1200#" alt></p>
+<p>因此当一台ABR在非Area0的区域中收到Type-3 LSA时，虽然它会将其装载进LSDB，但是该路由器不会使用这些Type-3LSA进行路由计算，当然它更不会将这些Type-3 LSA再注入回Area0中。</p>
+<h2 id="送你彩蛋咯，这里有一个有意思的细节"><a href="#送你彩蛋咯，这里有一个有意思的细节" class="headerlink" title="送你彩蛋咯，这里有一个有意思的细节~~"></a>送你彩蛋咯，这里有一个有意思的细节~~</h2><p>就是如果R3连接R2的接口虽然激活了OSPF（而且属于Area0），但是不与R2形成邻接关系（例如R2连接R3的接口不激活OSPF），那么此时R3其实并不算是严格意义上的ABR（虽然它产生的Type-1 LSA中B-bit会被置位，但是它在Area0中并没有全毗邻的邻居），因此它会将Area2内收到的Type-3 LSA用于区域间路由的计算，所以在R3的路由表中能看到1.1.1.0/24的区域间路由（下一跳为R4），但是一旦R2-R3之间的邻接关系建立起来，R3将不能再使用R4下发的Type-3 LSA计算路由，而仅能使用从Area0中收到的、R 2下发的Type-3 LSA进行区域间路由计算，所以此时R3路由表中1.1.1.0/ 24路由的下一跳为R2，而且即使这条路径的Cost要比从R4走更大（例如将R3连接R 2的接口Cost调大），R3也始终不会走R4到达1.1.1.0/24，除非R2挂掉，或者R2-R3丢失邻接关系。</p>
+<p><strong>ABR不会将描述一个Area内部的路由信息的Type-3LSA再注入回该区域中。</strong><br>实际上，OSPF区域间路由的传递行为，很有点距离矢量路由协议的味道。以下图为例，在Area1中，R1及R2都会泛洪Type-1 LSA、Type-2LSA，两台路由器都能够根据这些LSA计算区域内路由，而R2作为ABR还担负着另一个责任，就是向Area0通告区域间的路由，实际上它是向Area0中注入用于描述Area1内路由的Type-3 LSA，而这些Type-3 LSA是不会发回Area1的——是的，类似水平分割行为对吧？接下来R3利用这些Type-3 LSA计算出了区域间的路由，并且为Area2注入新的Type-3 LSA用于描述区域间的路由，而这些Type-3LSA同样的不会被注入回Area0。</p>
+<p>R2在向Area0通告Type-3 LSA，为每条区域间路由携带上Cost值，这个值就是它自己到达各个目标网段的Cost，而R3收到这些Type-3 LSA并计算路由时，路由的Cost就是在R2所通告的Cost值的基础上，加上R3自己到R2的Cost值，然后，R3向R4通告这些区域间的路由时也携带者自己到达目标网段的Cost，而R4到达目标网段的Cost则是在R3的通告值基础上累加自己到R3的Cost——典型的距离矢量行为。</p>
+<p><img src="http://source.iqianyue.net/wp-content/uploads/2017/05/2017050413020131.png?imageView2/2/w/1200#" alt></p>
+<p>综上，我们发现OSPF为了区域间的路由防环是操碎了心的。Type-4 LSA实际上与Type-3LSA都是Summary LSA，只不过一个是NetworkSummary LSA——用于描述网段路由，另一个则是ASBR Summary LSA——用于描述ASBR，他们使用的防环机制是一致的，因此这里不在赘述。</p>
+<p>Type-3 LSA还涉及了DN比特位，用于在MPLSVPN环境下的环路规避。</p>
+<h1 id="Type-5-LSA的防环。"><a href="#Type-5-LSA的防环。" class="headerlink" title="Type-5 LSA的防环。"></a>Type-5 LSA的防环。</h1><p>当一台OSPF路由器将外部路由引入OSPF域后，它就成为了一台ASBR，被引入的外部路由以Type-5 LSA在整个OSPF域内泛洪。一台路由器使用Type-5 LSA计算出路由的前提是两个，其一是要收到Type-5LSA，其二是要知道产生这个Type-5 LSA的ASBR在哪里。</p>
+<p>与ASBR接入同一个区域的路由器能够根据该区域内泛洪的Type-1LSA及Type-2 LSA计算出到达该ASBR的最短路径，从而计算出外部路由。而其他区域的路由器就没有这么幸运了，因为ASBR产生的Type-1LSA只能在其所在的区域内泛洪，所以才需要Type-4 LSA。</p>
+<p>因此其他区域的路由器在获取Type-4LSA后便能计算出到达ASBR的最短路径，进而利用该ASBR产生的Type-5 LSA计算出外部路由。Type-5 LSA将会被泛洪到整个OSPF域，表面上看，它本身并不具有什么防环的能力，但是实际上，它并不需要，因为它可以依赖Type-1LSA及Type-4 LSA来实现防环。</p>
+<p>另外，Type-5 LSA中的External RouteTag字段被用于在MPLS VPN环境下外部路由的防环，这里就不做深入探讨了。</p>
+	
+	</div>
+	
+	<div id="current-post-cover" data-scr="https://ae01.alicdn.com/kf/Hbb723aa4217749429478481241658eada.jpg"></div>
+
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+				<div>分享</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+			<a href="/2019/11/08/自动化ARP攻击脚本/" title="自动化ARP攻击脚本" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+		
+			<a href="/2019/10/03/利用ms17-010漏洞攻陷windows-server-2012服务器/" title="利用ms17_010漏洞攻陷windows server 2012服务器" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+
+
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
+
+<div class="relate-post">
+	
+		<ul>
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2020/03/07/VRRP主备切换/" title="VRRP协议主备切换与联动">
+								VRRP协议主备切换与联动			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								三月 7日, 2020				
+							</p>
+							<p class="relate-post-content">
+								VRRP虚拟路由冗余协议，最常用于网关的冗余备份，但是在现实项目中用到的并不多，因为现在很多项目都要求设备做堆叠了。
+
+VRRP协议使用的报文——announcement报文
+VRRP使用组播地址发送通告报文，地址为224.0.0.1...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2020/03/07/VRRP主备切换/" title="VRRP协议主备切换与联动">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="https://i.loli.net/2020/03/07/oIl7fO4WU5uwD8B.jpg" alt="VRRP协议主备切换与联动"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2020/02/17/故障分析——OSPF邻居卡在exchange状态/" title="故障分析——OSPF邻居卡在exchange状态">
+								故障分析——OSPF邻居卡在exchange状态			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 17日, 2020				
+							</p>
+							<p class="relate-post-content">
+								问题描述两台AR2204跨运营商通过GRE VPN建立OSPF邻居，上行接口闪断后，邻居一直卡在exchange状态，必须reset ospf进程后才能正常建立邻居
+
+处理过程1.邻居卡在exchange状态，说明2way状态已过，并...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2020/02/17/故障分析——OSPF邻居卡在exchange状态/" title="故障分析——OSPF邻居卡在exchange状态">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="https://s2.ax1x.com/2020/02/17/3PVEyn.jpg" alt="故障分析——OSPF邻居卡在exchange状态"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/11/08/三大路由协议是如何撤销路由的？/" title="三大路由协议是如何撤销路由的？">
+								三大路由协议是如何撤销路由的？			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 8日, 2019				
+							</p>
+							<p class="relate-post-content">
+								首先感谢王欣超和任培强两位网络工程师的指导！三大路由协议包括：OSPF、ISIS、BGP细想这些协议技术的产生其实挺有意思的，由于都是人将其研发出来的，所以协议的很多机制都挺人性化。比如OSPF的邻居建立，它就像两个人第一次见面建立邻...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/11/08/三大路由协议是如何撤销路由的？/" title="三大路由协议是如何撤销路由的？">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="https://ae01.alicdn.com/kf/Hdd16dcbedc194582976680ceb7e65b79c.jpg" alt="三大路由协议是如何撤销路由的？"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2020/02/29/Arduino控制电机驱动实现机器人运动/" title="Arduino控制小车运动">
+								Arduino控制小车运动			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 29日, 2020				
+							</p>
+							<p class="relate-post-content">
+								准备工具：
+Arduino开发板
+双直流电机
+万向轮
+H桥电机驱动板
+
+电机驱动如下：
+2路直流电机驱动板模块，双H桥步进电机驱动
+
+H桥控制电路在此之前你需要了解什么是H桥控制电路，电路如下：
+
+H桥是由四个三极管实现，Q1和Q3为...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2020/02/29/Arduino控制电机驱动实现机器人运动/" title="Arduino控制小车运动">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="https://i.loli.net/2020/03/01/nalSIoEmj4VALxX.jpg" alt="Arduino控制小车运动"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/11/08/自动化ARP攻击脚本/" title="自动化ARP攻击脚本">
+								自动化ARP攻击脚本			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 8日, 2019				
+							</p>
+							<p class="relate-post-content">
+								最近用到ARP欺骗攻击这个工具，发现了一些问题：由于不确定局域网中具体哪台设备才是你的攻击对象，所以我一般都会采用全部攻击的方式。但是这又会引申出另一个问题：首先需要扫描存活主机，然后再将存活的主机IP地址挨个进行手工攻击（可能有批量...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/11/08/自动化ARP攻击脚本/" title="自动化ARP攻击脚本">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="https://ae01.alicdn.com/kf/Hb4ec344886db437b9a17a3f61b112c688.png" alt="自动化ARP攻击脚本"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+		</ul>
+	
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
+
+	
+
+</div>
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-share">
+	
+	
+
+		
+			
+			<!-- socialShare share -->
+			<div class="social-share"></div>
+
+<!--  css & js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+			
+		
+		
+	
+</div>
+
+
+			</div>
+		</div>	
+	</div>
+	</div>
+</div>
+
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+	
+
+
+<!-- show math formula -->
+
+
+
+	 
+	<script src="/plugin/clipboard/clipboard.js"></script>
+	<script>
+		// Copy code !
+	    function codePreprocessing() {
+	        $("#article-content .highlight").each(function() {
+
+	            $(this).wrap('<div id="post-code"></div>');
+
+	        })
+
+	        $("#article-content #post-code").each(function() {
+
+	            $(this).prepend('<nav class="copy-nav"><span><i class="code-language"></i></span></nav>');
+
+	        })
+
+	        $("#article-content .copy-nav").each(function() {
+	            var temp = $(this).next().attr('class'),
+	                language = ((temp.length > 9) && (temp != null)) ? temp.substr(10) : "none"; //why 9? Need to check language?
+
+	            $(this).find('.code-language').text(language);
+
+	            $(this).append('<span class="copy-btn"><i class="fa fa-copy" aria-hidden="true"></i></span>');
+
+	        });
+	    }
+
+		function codeCopy() {
+		    $('#article-content #post-code').each(function(i) {
+		        var codeCopyId = 'codeCopy-' + i;
+
+		        var codeNode = $(this).find('.code'),
+		            copyButton = $(this).find('.copy-btn');
+
+		        codeNode.attr('id', codeCopyId);
+		        copyButton.attr('data-clipboard-target-id', codeCopyId);
+		    })
+
+		    
+			var clipboard = new ClipboardJS('.copy-btn', {
+					target: function(trigger) {
+						return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+					}
+		      	});
+
+			//pure js
+			function showTooltip(elem, msg) {		   
+				elem.setAttribute('aria-label', msg);
+				elem.setAttribute('class', 'copy-btn copy-status');
+				setTimeout(function() {
+					elem.setAttribute('class', 'copy-btn');
+				}, 2000);
+			}
+
+			clipboard.on('success', function(e) {
+			    e.clearSelection();
+			    console.info('Action:', e.action);		   
+			    console.info('Trigger:', e.trigger);
+			    showTooltip(e.trigger, 'Copied!');
+			    
+			});
+			clipboard.on('error', function(e) {
+			    console.error('Action:', e.action);
+			    console.error('Trigger:', e.trigger);
+			});
+		
+
+		}
+
+		if ($('.layout-post').length) {
+		    codePreprocessing();
+		    codeCopy();
+		} 
+	</script>
+
+
+
+
+
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+<script src="/plugin/fancybox/jquery.fancybox.js"></script>
+
+<script type="text/javascript">
+	var titleID = $('.article-title a'),
+		imageID = $('.article-content img'),
+		videoID = $('.article-content video');
+
+	var postTitle = titleID.text() ? titleID.text() : "No post title!";
+
+	imageID.each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+
+		//给每个匹配的<img>元素打包, 即添加父元素<a>
+		$(this).wrap('<a data-fancybox="gallery" data-caption=" 《 ' + postTitle + ' 》 ' + imgTitle + ' "  href=" ' + imgPath + ' "> </a>');
+	});
+
+	videoID.each(function() {
+		var videoPath = $(this).attr('src');
+
+		//给每个匹配的<img>元素打包, 即添加父元素<a>
+		$(this).wrap('<a data-fancybox href=" ' + videoPath + ' "> </a>');
+	});
+	//TODO：支持html5 video
+
+	if($('#layout-post').length) {
+		$('[data-fancybox="gallery"]').fancybox({
+			loop: true,
+			buttons: [
+				"zoom",
+				"share",
+				"slideShow",
+				"fullScreen",
+				//"download",
+				"thumbs",
+				"close"
+			],
+			protect: false
+		});
+	}
+</script>
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		<li>
+			<a href="https://github.com/X-2018" target="_blank">
+				<i class="fa fa-github"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="https://weibo.com/a370323" target="_blank">
+				<i class="fa fa-weibo"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://test407.lofter.com/" target="_blank">
+				<i class="fa fa-instagram"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="https://space.bilibili.com/39018066" target="_blank">
+				<i class="fa fa-twitter"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="/sitemap.html" target="_blank">
+				<i class="fa fa-rss"></i>
+			</a>
+		</li>
+			
+</ul>
+
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2020, content by 千秋雪. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
+		</p>
+		<p>
+			您可在此切换中文类型：.
+			<a href="javascript:zh_tran('s');" class="zh_click" id="zh_click_s">简体</a> 
+			<a href="javascript:zh_tran('t');" class="zh_click" id="zh_click_t">繁體</a>				
+		</p>
+<hr>
+		<p>
+			<a href="http://flag0.com/" target="_blank">GetFlag博客</a> | 
+			<a href="https://www.feiyusafe.cn" target="_blank">飞宇博客</a> | 
+			<a href="https://dc86025.08sec.org/" target="_blank">DEFCON GROUP 86025</a> | 
+			<a href="https://www.08sec.org/" target="_blank">08安全团队</a> | 
+			<script type="text/javascript" src="https://s19.cnzz.com/z_stat.php?id=1275168128&web_id=1275168128"></script>
+		
+		</p>
+
+
+
+
+	</div>		
+</footer>
+		
+	<!-- set '1' to show motto in all pages! -->
+
+	<script src="/plugin/motto/motto.js"></script>
+	
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+	<!--
+	时间：2018-10-3
+	描述：
+		插件名称：hexo-generator-search-zip
+		插件来源: https://github.com/SuperKieran/hexo-generator-search-zip
+		代码参考：https://github.com/SuperKieran/TKL/blob/master/layout/_partial/search.ejs(Include: js & css)	
+-->
+<div class="popup search-popup local-search-popup" >
+	<div class="local-search-container">
+		<span class="popup-btn-close">
+      		ESC
+   		</span>
+		<div class="local-search-header">
+			<div class="input-prompt">				
+			</div>
+			<input autocomplete="off" placeholder="Search..." type="text" id="local-search-input">
+		</div>
+		<div class="local-search-body">
+			<div id="local-search-output"></div>
+		</div>
+		<div class="local-search-footer">
+			<div class="topN-post">				
+				
+								
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="/plugin/search/ziploader.js"></script>
+<script src="/plugin/search/search.js"></script>
+
+<script type="text/javascript">
+	var search_path = 'search.json',
+		zip_Path = '/search.zip',
+		version_Path = '/searchVersion.txt',
+		input_Trigger = 'auto',
+		top_N = '2';
+
+	themeLocalSearch({
+		search_path, 
+		zip_Path, 
+		version_Path, 
+		input_Trigger, 
+		top_N
+	});
+</script>
+
+
+<!-- love effect -->
+
+	<script src="/plugin/love/love.js"></script>
+
+
+<!-- back to top -->
+
+	
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+
+
+
+
+<!-- site analysis -->
+
+
+	<!-- site-analysis -->
+	
+	
+	
+	
+	
+ 
+
+<script src="/plugin/vibrant/vibrant.js"></script>
+<script src="/plugin/chinese/chinese.js"></script>
+<script src="/plugin/imgLazyLoader/yall.min.js"></script>
+<script src="/plugin/imgResize/jquery.resizeimagetoparent.min.js"></script>
+<script src="/plugin/nicescroll/jquery.nicescroll.js"></script>
+<script src="/js/resizediv.js"></script>
+<script src="/js/main.js"></script>
+	</body>	
+</html>

@@ -1,0 +1,927 @@
+<!--
+	作者：Sariay
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+<!DOCTYPE html>
+<html class="html-loading">
+		
+
+<head><meta name="generator" content="Hexo 3.9.0">
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      HCNP-Routing&amp;Switching-IEEP H12-233知识点整理 | 千秋雪博客
+    
+  </title>
+  <meta name="author" content="千秋雪">
+  <meta name="keywords" content="千秋雪博客">
+  <meta name="description" content="学无止境">
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/Annie.css">
+  
+  <!-- jquery -->
+	<script src="/js/jquery.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="spinner">
+					<div class="double-bounce1"></div>
+					<div class="double-bounce2"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="normal" data-normal-src="https://ae01.alicdn.com/kf/He930e138dfc14b7dbd45bc16dccb897cb.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
+	<div class="mask">
+		<!-- Logo and navigation -->
+		<div class="h-header">
+			<div id="logo">
+				<a href="/">
+						
+						<img src="/img/logo.png" alt="Logo">
+					
+				</a>
+			</div>
+			
+			<div id="navigation-show">
+				<ul>
+	
+		<li class="menu-首页">
+			<a href="/" class="menu-item-首页">首页</a>
+		</li>
+	
+		<li class="menu-归档">
+			<a href="/archives" class="menu-item-归档">归档</a>
+		</li>
+	
+		<li class="menu-相册">
+			<a href="/photo" class="menu-item-相册">相册</a>
+		</li>
+	
+		<li class="menu-图床">
+			<a href="/tuchuang" class="menu-item-图床">图床</a>
+		</li>
+	
+		<li class="menu-关于我">
+			<a href="/about" class="menu-item-关于我">关于我</a>
+		</li>
+	
+
+	
+		<li class="menu-search">
+			<a href="javascript:;" class="popup-trigger">搜索</a>
+		</li>
+	
+</ul>
+			</div>				
+		</div>
+
+		<!-- motto -->
+		<div class="h-body">	
+			
+				<p class="motto"></p>
+			
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down" aria-hidden="true"></i>
+			</a>
+
+			
+				<!-- 
+	This is only a demo, please go to "https://time.is" to set your city time! 
+-->
+<style type="text/css">
+	.header-date {
+		font-size: 1.6rem;
+		color: #fff;
+		position: absolute;
+		bottom: 5px;
+		right: 1rem;
+		writing-mode: tb-rl;
+	}	
+	
+	.header-date a {
+		border-bottom: none;
+	}
+
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			font-size: 1rem;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+			
+		</div>
+	</div>
+</header>
+
+<div id="navigation-hide">
+	<!-- Progress bar -->
+	<div id="progress-bar"></div>
+
+	<!-- Progress percent -->
+	<div id="progress-percentage"><h1>0.0%</h1></div>
+
+	<div class="toc-switch"><span class="switch-button">目录</span></div>
+
+	<!-- Page title -->
+	<p>
+		
+			当前文章&nbsp;:&nbsp;《HCNP-Routing&amp;Switching-IEEP H12-233知识点整理》
+		
+	</p>
+
+	<!-- Nav trigger for navigation-H-->
+	<a class="nav-trigger"><span></span></a>
+</div>
+
+<!-- Navigation in div(id="navigation-H") -->
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+	
+		<li class="menu-首页">
+			<a href="/" class="menu-item-首页">首页</a>
+		</li>
+	
+		<li class="menu-归档">
+			<a href="/archives" class="menu-item-归档">归档</a>
+		</li>
+	
+		<li class="menu-相册">
+			<a href="/photo" class="menu-item-相册">相册</a>
+		</li>
+	
+		<li class="menu-图床">
+			<a href="/tuchuang" class="menu-item-图床">图床</a>
+		</li>
+	
+		<li class="menu-关于我">
+			<a href="/about" class="menu-item-关于我">关于我</a>
+		</li>
+	
+
+	
+		<li class="menu-search">
+			<a href="javascript:;" class="popup-trigger">搜索</a>
+		</li>
+	
+</ul>
+	</div>
+	<div class="nav-footer">
+		<ul>
+	
+		<li>
+			<a href="https://github.com/X-2018" target="_blank">
+				<i class="fa fa-github"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="https://weibo.com/a370323" target="_blank">
+				<i class="fa fa-weibo"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://test407.lofter.com/" target="_blank">
+				<i class="fa fa-instagram"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="https://space.bilibili.com/39018066" target="_blank">
+				<i class="fa fa-twitter"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="/sitemap.html" target="_blank">
+				<i class="fa fa-rss"></i>
+			</a>
+		</li>
+			
+</ul>
+
+	</div>
+</nav>
+			
+		<!--main-->
+		<main>
+			<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+	 
+
+<div class="layout-post">
+	<div id="layout-post">
+	<div class="article-title">
+		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+		
+	<a href="/2019/09/29/HCNP-Routing-Switching-IEEP-H12-233知识点整理/" itemprop="url">
+		HCNP-Routing&amp;Switching-IEEP H12-233知识点整理
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			<i class="fa fa-calendar"></i>
+			
+
+
+	发布于
+
+	<a href="/2019/09/29/HCNP-Routing-Switching-IEEP-H12-233知识点整理/" itemprop="url">
+		<time datetime="2019-09-29T01:02:15.000Z" itemprop="datePublished">
+	  		2019-09-29
+	  </time>
+	</a>
+	&nbsp;
+
+
+
+
+
+			
+
+
+
+
+	更新于
+
+	<a href="/2019/09/29/HCNP-Routing-Switching-IEEP-H12-233知识点整理/" itemprop="url">
+		<time datetime="2019-09-29T01:02:15.000Z" itemprop="dateUpdated">
+	  		2019-09-29
+	  </time>
+	</a> 
+
+
+
+		</span>
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/路由交换/" class=" ">
+			路由交换
+		</a>
+	
+		
+		</span>
+		
+		
+
+
+
+	</div>
+
+	<div class="article-content" id="article-content">
+		<p>网络规划<br>网络规划调研分析项目背景，确定用户的需求和目标，确定技术方向。</p>
+<p>目标：项目背景、确定需求、技术方向。</p>
+<p>项目背景<br>方式：调查、沟通、报告</p>
+<p>项目范围：工程边界、功能边界、覆盖范围</p>
+<p>WBS：工作分解结构</p>
+<p>把整个项目分解成较小的，更易于管理的组成部分。</p>
+<p>甘特图：将分解后的工作活动排序，用图示的方式将活动与时间联系起来。</p>
+<p>项目的配套：机房、空调、机架、布线、供电</p>
+<p>外部风险控制：政策法规、金融财务、配套协作、自然灾害、社会环境</p>
+<p>项目目标<br>项目预算：自上向下、自下向上</p>
+<p>TCO（总体拥有成本）=建设投资+运行维护+优化改造</p>
+<p>项目技术方向<br>性能、可用性、扩展性、可实现性、网络功能</p>
+<p>网络模块与层次：模块化和层次化</p>
+<p>网络设计<br>网络设计的输出结果必须是规范的、详细的、明确的、可实现的</p>
+<p>遵循模块化的指导化方针</p>
+<p>设计的关键：选择</p>
+<p>网络设计关注点：</p>
+<p>功能与性能：连通性、吞吐量、延迟、抖动、误码率</p>
+<p>经济性：人力、物力、财力、建设周期</p>
+<p>可靠性（可用性）：MTBF、MTTF、MTTR</p>
+<p>扩展性：拓扑、地址、协议</p>
+<p>安全性：资产、风险、对策</p>
+<p>可管理性：SNMP、NETconf、SDN、GUI、NMS</p>
+<p>常见的拓扑结构：星型、双星型、口字型、环型、总线型</p>
+<p>交换机体系结构：总线式交换机、矩阵式交换机</p>
+<p>楼宇布线子系统：水平子系统、垂直子系统、工作区子系统</p>
+<p>数据中心布线结构：TOR、EOR</p>
+<p>基于SDH传输系统：DDN、E1、POS、MSTP</p>
+<p>基于波分复用：DWDM</p>
+<p>基于传统电话网：PSTN、ISDN</p>
+<p>基于报文交换：ATM、FR、X.25</p>
+<p>链路类型    结构特点    二层协议<br>DDN、E1、POS    点到点链路    HDLC\PPP<br>PSTN、ISDN    点到点链路    PPP<br>OTN（WDM）    点到点链路    ETHERNET<br>分组交换网    点到多点链路    X.25\FR\ATM</p>
+<p>点到点链路是广域网的主流链路<br>PPP协议是广域网点到点链路使用的主流协议</p>
+<p>OTN网络可提供以太网接口接入</p>
+<p>MTTF：平均无故障时间</p>
+<p>MTTR:平均修复时间</p>
+<p>可用性：MTTF/（MTTF+MTTR）*100%</p>
+<p>TCP/IP协议缺陷：无数据源验证、无机密性保障、无完整性校验</p>
+<p>胖AP：协议栈完整、能独立运行，每个AP独立管理，不支持AP间漫游，适用于小型网络</p>
+<p>瘦AP：协议栈不完整、需要配合AC才能工作，易部署、易管理，集中管理，支持AP间漫游，适用<br>于大型网络。</p>
+<p>网络实施<br>项目交付流程<br>对项目实施的管理和作业控制要求，保证了工程项目实施按照规定的程序进行。目的：增加客户满意度，提高工作效率，降低项目风险</p>
+<p>项目交付流程：合同签订、项目启动会、方案制定、开箱验货、设备安装、质量自检、软件调测、转维培训、项目验收、DOA流程。</p>
+<p>项目启动会：明确客户需求、周期、双方负责人、管理制度、安装环境。<br>转维培训、组网和配置培训、日常维护培训、紧急故障处理培训</p>
+<p>高危操作流程<br>方案制定、获取三授权、操作实施与结果反馈</p>
+<p>方案制定：精准性、可操作、有验证、能回退</p>
+<p>三授权：管理授权、技术授权、客户授权</p>
+<p>提醒客户信息安全：账号清理、密码更新、日志保护、数据备份、评审实施</p>
+<p>网络维护<br>日常维护是例行的计划的工作</p>
+<p>故障排除是事件驱动的工作</p>
+<p>网络排障<br>结构化的网络故障排除流程：</p>
+<p>报告故障、确定故障、收集信息、判断分析、原因列表、排障评估、逐一排查</p>
+<p>确认故障四要素：主体、表现、时间、位置</p>
+<p>收集信息：收集哪些信息、如何收集信息、是否需要授权、收集信息阶段的风险评估</p>
+<p>判断分析：故障信息、维护信息、变更信息、团队经验</p>
+<p>原因列表：信息过滤</p>
+<p>排障评估：搭建临时环境</p>
+<p>逐一排查：应急预案、回退准备</p>
+<p>文档移交：故障排除过程文档、故障排除总结报告、变更备份和维护建议</p>
+<p>网络优化<br>网络优化的主要内容：硬件优化、软件优化、网络扩容、新技术更新</p>
+<p>网络优化需求：运维建议、新业务功能需求、现网集中整改的需求、法律法规等政策需求</p>
+<p>需求分析：需求的合理性、优化的必要性、操作的可行性</p>
+<p>网络优化专业服务：提高业务性能、提高网络可用性和性能、提高生产率、降低成本、实现知识转移</p>
+<p>网络安全：管理安全、边界安全、访问控制、接入安全、流量监控</p>
+<p>新增WLAN接入需考虑：对现网的影响、预期效果、投资预算</p>
+	
+	</div>
+	
+	<div id="current-post-cover" data-scr="https://ae01.alicdn.com/kf/H56d817101d5240b2bf062675dc3e1769T.jpg"></div>
+
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+				<div>分享</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+			<a href="/2019/10/03/CVE-2019-0708漏洞利用/" title="CVE-2019-0708漏洞利用" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+		
+			<a href="/2019/09/29/利用php输入流getshell教程/" title="利用php输入流getshell教程" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+
+
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
+
+<div class="relate-post">
+	
+		<ul>
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2020/03/07/VRRP主备切换/" title="VRRP协议主备切换与联动">
+								VRRP协议主备切换与联动			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								三月 7日, 2020				
+							</p>
+							<p class="relate-post-content">
+								VRRP虚拟路由冗余协议，最常用于网关的冗余备份，但是在现实项目中用到的并不多，因为现在很多项目都要求设备做堆叠了。
+
+VRRP协议使用的报文——announcement报文
+VRRP使用组播地址发送通告报文，地址为224.0.0.1...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2020/03/07/VRRP主备切换/" title="VRRP协议主备切换与联动">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="https://i.loli.net/2020/03/07/oIl7fO4WU5uwD8B.jpg" alt="VRRP协议主备切换与联动"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2020/02/29/Arduino控制电机驱动实现机器人运动/" title="Arduino控制小车运动">
+								Arduino控制小车运动			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 29日, 2020				
+							</p>
+							<p class="relate-post-content">
+								准备工具：
+Arduino开发板
+双直流电机
+万向轮
+H桥电机驱动板
+
+电机驱动如下：
+2路直流电机驱动板模块，双H桥步进电机驱动
+
+H桥控制电路在此之前你需要了解什么是H桥控制电路，电路如下：
+
+H桥是由四个三极管实现，Q1和Q3为...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2020/02/29/Arduino控制电机驱动实现机器人运动/" title="Arduino控制小车运动">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="https://i.loli.net/2020/03/01/nalSIoEmj4VALxX.jpg" alt="Arduino控制小车运动"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2020/02/17/故障分析——OSPF邻居卡在exchange状态/" title="故障分析——OSPF邻居卡在exchange状态">
+								故障分析——OSPF邻居卡在exchange状态			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 17日, 2020				
+							</p>
+							<p class="relate-post-content">
+								问题描述两台AR2204跨运营商通过GRE VPN建立OSPF邻居，上行接口闪断后，邻居一直卡在exchange状态，必须reset ospf进程后才能正常建立邻居
+
+处理过程1.邻居卡在exchange状态，说明2way状态已过，并...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2020/02/17/故障分析——OSPF邻居卡在exchange状态/" title="故障分析——OSPF邻居卡在exchange状态">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="https://s2.ax1x.com/2020/02/17/3PVEyn.jpg" alt="故障分析——OSPF邻居卡在exchange状态"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/11/08/三大路由协议是如何撤销路由的？/" title="三大路由协议是如何撤销路由的？">
+								三大路由协议是如何撤销路由的？			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 8日, 2019				
+							</p>
+							<p class="relate-post-content">
+								首先感谢王欣超和任培强两位网络工程师的指导！三大路由协议包括：OSPF、ISIS、BGP细想这些协议技术的产生其实挺有意思的，由于都是人将其研发出来的，所以协议的很多机制都挺人性化。比如OSPF的邻居建立，它就像两个人第一次见面建立邻...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/11/08/三大路由协议是如何撤销路由的？/" title="三大路由协议是如何撤销路由的？">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="https://ae01.alicdn.com/kf/Hdd16dcbedc194582976680ceb7e65b79c.jpg" alt="三大路由协议是如何撤销路由的？"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2019/11/08/自动化ARP攻击脚本/" title="自动化ARP攻击脚本">
+								自动化ARP攻击脚本			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十一月 8日, 2019				
+							</p>
+							<p class="relate-post-content">
+								最近用到ARP欺骗攻击这个工具，发现了一些问题：由于不确定局域网中具体哪台设备才是你的攻击对象，所以我一般都会采用全部攻击的方式。但是这又会引申出另一个问题：首先需要扫描存活主机，然后再将存活的主机IP地址挨个进行手工攻击（可能有批量...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2019/11/08/自动化ARP攻击脚本/" title="自动化ARP攻击脚本">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="https://ae01.alicdn.com/kf/Hb4ec344886db437b9a17a3f61b112c688.png" alt="自动化ARP攻击脚本"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+		</ul>
+	
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
+
+	
+
+</div>
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-share">
+	
+	
+
+		
+			
+			<!-- socialShare share -->
+			<div class="social-share"></div>
+
+<!--  css & js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+			
+		
+		
+	
+</div>
+
+
+			</div>
+		</div>	
+	</div>
+	</div>
+</div>
+
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+	
+
+
+<!-- show math formula -->
+
+
+
+	 
+	<script src="/plugin/clipboard/clipboard.js"></script>
+	<script>
+		// Copy code !
+	    function codePreprocessing() {
+	        $("#article-content .highlight").each(function() {
+
+	            $(this).wrap('<div id="post-code"></div>');
+
+	        })
+
+	        $("#article-content #post-code").each(function() {
+
+	            $(this).prepend('<nav class="copy-nav"><span><i class="code-language"></i></span></nav>');
+
+	        })
+
+	        $("#article-content .copy-nav").each(function() {
+	            var temp = $(this).next().attr('class'),
+	                language = ((temp.length > 9) && (temp != null)) ? temp.substr(10) : "none"; //why 9? Need to check language?
+
+	            $(this).find('.code-language').text(language);
+
+	            $(this).append('<span class="copy-btn"><i class="fa fa-copy" aria-hidden="true"></i></span>');
+
+	        });
+	    }
+
+		function codeCopy() {
+		    $('#article-content #post-code').each(function(i) {
+		        var codeCopyId = 'codeCopy-' + i;
+
+		        var codeNode = $(this).find('.code'),
+		            copyButton = $(this).find('.copy-btn');
+
+		        codeNode.attr('id', codeCopyId);
+		        copyButton.attr('data-clipboard-target-id', codeCopyId);
+		    })
+
+		    
+			var clipboard = new ClipboardJS('.copy-btn', {
+					target: function(trigger) {
+						return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+					}
+		      	});
+
+			//pure js
+			function showTooltip(elem, msg) {		   
+				elem.setAttribute('aria-label', msg);
+				elem.setAttribute('class', 'copy-btn copy-status');
+				setTimeout(function() {
+					elem.setAttribute('class', 'copy-btn');
+				}, 2000);
+			}
+
+			clipboard.on('success', function(e) {
+			    e.clearSelection();
+			    console.info('Action:', e.action);		   
+			    console.info('Trigger:', e.trigger);
+			    showTooltip(e.trigger, 'Copied!');
+			    
+			});
+			clipboard.on('error', function(e) {
+			    console.error('Action:', e.action);
+			    console.error('Trigger:', e.trigger);
+			});
+		
+
+		}
+
+		if ($('.layout-post').length) {
+		    codePreprocessing();
+		    codeCopy();
+		} 
+	</script>
+
+
+
+
+
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+<script src="/plugin/fancybox/jquery.fancybox.js"></script>
+
+<script type="text/javascript">
+	var titleID = $('.article-title a'),
+		imageID = $('.article-content img'),
+		videoID = $('.article-content video');
+
+	var postTitle = titleID.text() ? titleID.text() : "No post title!";
+
+	imageID.each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+
+		//给每个匹配的<img>元素打包, 即添加父元素<a>
+		$(this).wrap('<a data-fancybox="gallery" data-caption=" 《 ' + postTitle + ' 》 ' + imgTitle + ' "  href=" ' + imgPath + ' "> </a>');
+	});
+
+	videoID.each(function() {
+		var videoPath = $(this).attr('src');
+
+		//给每个匹配的<img>元素打包, 即添加父元素<a>
+		$(this).wrap('<a data-fancybox href=" ' + videoPath + ' "> </a>');
+	});
+	//TODO：支持html5 video
+
+	if($('#layout-post').length) {
+		$('[data-fancybox="gallery"]').fancybox({
+			loop: true,
+			buttons: [
+				"zoom",
+				"share",
+				"slideShow",
+				"fullScreen",
+				//"download",
+				"thumbs",
+				"close"
+			],
+			protect: false
+		});
+	}
+</script>
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		<li>
+			<a href="https://github.com/X-2018" target="_blank">
+				<i class="fa fa-github"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="https://weibo.com/a370323" target="_blank">
+				<i class="fa fa-weibo"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="http://test407.lofter.com/" target="_blank">
+				<i class="fa fa-instagram"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="https://space.bilibili.com/39018066" target="_blank">
+				<i class="fa fa-twitter"></i>
+			</a>
+		</li>
+	
+		<li>
+			<a href="/sitemap.html" target="_blank">
+				<i class="fa fa-rss"></i>
+			</a>
+		</li>
+			
+</ul>
+
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2020, content by 千秋雪. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
+		</p>
+		<p>
+			您可在此切换中文类型：.
+			<a href="javascript:zh_tran('s');" class="zh_click" id="zh_click_s">简体</a> 
+			<a href="javascript:zh_tran('t');" class="zh_click" id="zh_click_t">繁體</a>				
+		</p>
+<hr>
+		<p>
+			<a href="http://flag0.com/" target="_blank">GetFlag博客</a> | 
+			<a href="https://www.feiyusafe.cn" target="_blank">飞宇博客</a> | 
+			<a href="https://dc86025.08sec.org/" target="_blank">DEFCON GROUP 86025</a> | 
+			<a href="https://www.08sec.org/" target="_blank">08安全团队</a> | 
+			<script type="text/javascript" src="https://s19.cnzz.com/z_stat.php?id=1275168128&web_id=1275168128"></script>
+		
+		</p>
+
+
+
+
+	</div>		
+</footer>
+		
+	<!-- set '1' to show motto in all pages! -->
+
+	<script src="/plugin/motto/motto.js"></script>
+	
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+	<!--
+	时间：2018-10-3
+	描述：
+		插件名称：hexo-generator-search-zip
+		插件来源: https://github.com/SuperKieran/hexo-generator-search-zip
+		代码参考：https://github.com/SuperKieran/TKL/blob/master/layout/_partial/search.ejs(Include: js & css)	
+-->
+<div class="popup search-popup local-search-popup" >
+	<div class="local-search-container">
+		<span class="popup-btn-close">
+      		ESC
+   		</span>
+		<div class="local-search-header">
+			<div class="input-prompt">				
+			</div>
+			<input autocomplete="off" placeholder="Search..." type="text" id="local-search-input">
+		</div>
+		<div class="local-search-body">
+			<div id="local-search-output"></div>
+		</div>
+		<div class="local-search-footer">
+			<div class="topN-post">				
+				
+								
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="/plugin/search/ziploader.js"></script>
+<script src="/plugin/search/search.js"></script>
+
+<script type="text/javascript">
+	var search_path = 'search.json',
+		zip_Path = '/search.zip',
+		version_Path = '/searchVersion.txt',
+		input_Trigger = 'auto',
+		top_N = '2';
+
+	themeLocalSearch({
+		search_path, 
+		zip_Path, 
+		version_Path, 
+		input_Trigger, 
+		top_N
+	});
+</script>
+
+
+<!-- love effect -->
+
+	<script src="/plugin/love/love.js"></script>
+
+
+<!-- back to top -->
+
+	
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+
+
+
+
+<!-- site analysis -->
+
+
+	<!-- site-analysis -->
+	
+	
+	
+	
+	
+ 
+
+<script src="/plugin/vibrant/vibrant.js"></script>
+<script src="/plugin/chinese/chinese.js"></script>
+<script src="/plugin/imgLazyLoader/yall.min.js"></script>
+<script src="/plugin/imgResize/jquery.resizeimagetoparent.min.js"></script>
+<script src="/plugin/nicescroll/jquery.nicescroll.js"></script>
+<script src="/js/resizediv.js"></script>
+<script src="/js/main.js"></script>
+	</body>	
+</html>
